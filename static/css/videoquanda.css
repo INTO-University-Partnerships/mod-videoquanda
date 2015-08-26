@@ -1,0 +1,207 @@
+#activity-header {
+    margin-bottom: 35px;
+}
+
+#activity-footer {
+    margin-top: 15px;
+}
+
+#videoquanda-activity .column {
+    float:left;
+    position: relative;
+}
+
+#videoquanda-activity .column.left {
+    width: 300px;
+    margin-right: 10px;
+    padding: 0 5px;
+}
+
+#videoquanda-activity .column.right {
+    width: 640px;
+}
+
+/** both columns **/
+#videoquanda-activity .questions .question {
+    width: 100%;
+    display: none;
+    padding: 4px 0;
+    border-bottom: 1px solid #e3e3e3;
+    position: relative;
+}
+
+#videoquanda-activity .questions {
+    margin-top: 10px;
+}
+
+/** left column **/
+
+#videoquanda-activity .textarea-question {
+    width: 286px;
+    height: 100px;
+    resize: none;
+}
+
+#videoquanda-activity #question-time {
+    float: left;
+    display: none;
+    width: 220px;
+    font-size: 11px;
+    line-height: 16px;
+}
+
+#videoquanda-activity #question-time span.seconds {
+    font-weight: bold;
+}
+
+#videoquanda-activity .submit-question {
+    float: right;
+}
+
+#videoquanda-activity .column.left span#load-all-questions {
+    display: block;
+    text-align: center;
+}
+
+#videoquanda-activity .column.left .questions .question {
+    cursor: pointer;
+}
+
+#videoquanda-activity .column.left .questions .question:hover,
+#videoquanda-activity .column.left .questions .question.active {
+    background-color: #f5f5f5;
+}
+
+#videoquanda-activity .column.left .questions .question:first-child {
+    border-top: 1px solid #e3e3e3;
+}
+
+#videoquanda-activity .column.left .questions .question .question-answer-count {
+    float: right;
+}
+
+/** right column **/
+
+#jquery_jplayer_1 {
+    position: relative;
+}
+
+#videoquanda-activity span#notification {
+    position: absolute;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    height: 20px;
+    top: 50%;
+    left: 0px;
+    text-align: center;
+    margin-top: -10px;
+}
+
+#videoquanda-activity .column.right .questions {
+    max-height: 600px;
+    min-height: 600px;
+    overflow: auto;
+    position: relative;
+}
+
+#videoquanda-activity .column.right .question {
+    width: 100%;
+    display: none;
+    border-width: 2px;
+    position: relative;
+}
+
+#videoquanda-activity .column.right .question:last-child {
+    border-bottom: none;
+}
+
+#videoquanda-activity .column.right .question .seconds {
+    cursor: pointer;
+}
+
+#videoquanda-activity .column.right .question .manage-buttons {
+    float: right;
+    display: block;
+}
+
+#videoquanda-activity .column.right .question .manage-buttons button {
+    padding: 4px 10px;
+}
+
+#videoquanda-activity .column.right .question .question-post-date {
+    float: right;
+    margin-right: 5px;
+}
+
+#videoquanda-activity .column.right .question .question-content {
+    margin: 0 0 10px 50px;
+}
+
+#videoquanda-activity .questions .question .question-text,
+#videoquanda-activity .questions .question .answer-text {
+    display: block;
+}
+
+#videoquanda-activity .column.right .question .question-header,
+#videoquanda-activity .column.right .question .answer-header {
+    display: block;
+    color: #BBB;
+}
+
+#videoquanda-activity .column.right .question .question-author,
+#videoquanda-activity .column.right .question .answer-author {
+    color: #08c;
+}
+
+#videoquanda-activity .column.right .answers {
+    display: none;
+}
+
+#videoquanda-activity .column.right .answers .answer {
+    display: none;
+    padding: 5px 0 5px 50px;
+    border-bottom: 1px solid #e3e3e3;
+    position: relative;
+}
+
+#videoquanda-activity .column.right .answers .answer:last-child {
+    border-bottom: none;
+}
+
+#videoquanda-activity .column.right .answers .answer .answer-post-date {
+
+}
+
+#videoquanda-activity .column.right .question .edit-input {
+    display: none;
+    position: relative;
+    float: left;
+}
+
+#videoquanda-activity .column.right .question .response {
+    position: relative;
+    margin-left: 50px;
+}
+
+#videoquanda-activity .column.right .question textarea {
+    width: 400px;
+    height: 20px;
+    resize: none;
+}
+
+#videoquanda-activity .column.right .question textarea:focus {
+    height: 100px;
+}
+
+#videoquanda-activity .column.right .question .edit-input button,
+#videoquanda-activity .column.right .question .response button {
+    position: absolute;
+    left: 417px;
+    top: 0px;
+}
+
+#videoquanda-activity .column.right .question .answer-header {
+    margin-left: 50px;
+    text-transform: capitalize;
+}

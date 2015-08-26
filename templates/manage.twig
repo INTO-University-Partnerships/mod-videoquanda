@@ -1,0 +1,50 @@
+{{ jquery() }}
+{{ page('course', course.id, wwwroot ~ slug ~ path('instances', {courseid: course.id})) }}
+{{ navbaradd(trans('modulenameplural', plugin)) }}
+{{ header()|raw }}
+
+<h2>{{ trans('modulename', plugin) }}</h2>
+<h3>{{ trans('upload_video', plugin) }}</h3>
+
+<form enctype="multipart/form-data" action="" method="post" id="video-form">
+    <input type="hidden" name="sesskey" value="{{ sesskey() }}"/>
+
+    <fieldset>
+        {% for key, type in accepted_file_types %}
+            {% set file = form[key].vars.attr.value %}
+
+            <p data-video-type="{{ key }}">
+
+                <label>{{ '.' ~ key|upper }}:</label>
+                <input type="file"/>
+
+                {% if file is defined and file is not empty %}
+                    <input type="hidden" name="form[{{ key }}]" value="{{ file }}"/>
+
+                    <a href="{{ wwwroot ~ slug ~ path('file', {'instanceid': data.id, 'file': file }) }}" class="btn btn-info btn-small">
+                        <i class="icon-file"></i> {{ file }}
+                    </a>
+
+                    <a href="javascript:;" class="btn btn-small btn-danger delete-video" data-video-type="{{ key }}">
+                        <i class="icon-trash"></i>
+                        {{ trans('delete') }}
+                    </a>
+                {% endif %}
+
+                {{ form_errors(form[key]) }}
+            </p>
+        {% endfor %}
+
+        <p>
+            <button type="submit" name="form[submit]" id="form_submit">{{ trans('save_and_return', 'videoquanda') }}</button>
+            <button type="submit" name="form[cancel]" id="form_cancel">{{ trans('cancel', 'moodle') }}</button>
+        </p>
+    </fieldset>
+</form>
+
+{# begin footer #}
+{% set footer_script %}
+    <script src="{{ wwwroot }}/mod/videoquanda/static/js/manage.js"></script>
+{% endset %}
+{{ footer(footer_script)|raw }}
+{# end footer #}

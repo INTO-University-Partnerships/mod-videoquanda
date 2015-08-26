@@ -1,0 +1,137 @@
+{{ jquery() }}
+{{ css('/mod/videoquanda/static/css/videoquanda.css') }}
+{{ css('/mod/videoquanda/static/css/jplayer.blue.monday.css') }}
+
+{{ page('module', cm.id, wwwroot ~ slug ~ path('instances', {courseid: course.id})) }}
+{{ header()|raw }}
+
+<h2>{{ instance.name }}</h2>
+
+{% if videos is defined and videos is not empty %}
+    <input type="hidden" id="instanceid" value="{{ instance.id }}"/>
+    <input type="hidden" id="userid" value="{{ userid }}"/>
+
+    {% if can_manage %}
+        <input type="hidden" id="can-manage" value="1"/>
+    {% endif %}
+
+    {% if is_guest %}
+        <input type="hidden" id="is-guest" value="1"/>
+    {% endif %}
+
+    <div id="activity-header clearfix">
+        {% if instance.header is defined and instance.header is not empty %}
+            {{ instance.header|raw() }}
+        {% endif %}
+    </div>
+
+    <div id="videoquanda-activity" class="clearfix">
+
+        <div class="column left">
+
+            {% if not is_guest %}
+                <textarea class="textarea-question submit-on-return" placeholder="{{ trans('question_placeholder', plugin) }}"></textarea>
+                <span id="question-time">{{ trans('question_will_appear_at_seconds', plugin)|raw() }}</span>
+
+                <button type="submit" class="submit-question">{{ trans('submit') }}</button>
+            {% endif %}
+
+            <div class="clearfix"></div>
+
+            <span id="load-all-questions">
+                {{ trans('questions_playlist' ,plugin) }}
+                (<a href="javascript:;">{{ trans('reveal_all', plugin) }}</a>)
+            </span>
+
+            <div class="questions">
+
+                <p id="no-questions-message">{{ trans('no_questions_message', plugin) }}</p>
+
+                <div class="question updated">
+                    <span class="seconds">00:00</span>
+                    <span class="question-answer-count">0 answers</span>
+                    <span class="question-text"></span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="column right">
+
+            {% include 'jplayer.twig' %}
+
+            <div class="questions">
+
+                <div class="question updated">
+
+                    <span class="seconds">00:00</span>
+                    <span class="question-post-date clearfix">today</span>
+
+                    <div class="question-content">
+
+                        <div class="manage-buttons">
+                            <button class="edit-button btn-small"><i class="icon-edit"></i></button>
+                            <button class="delete-button btn-small"><i class="icon-trash"></i></button>
+                        </div>
+
+                        <span class="question-header">{{ trans('question') }}:</span>
+                        <span class="question-text text"></span>
+                        <span class="question-author author"></span>
+
+                        <div class="clearfix"></div>
+                        <span class="edit-input">
+                            <textarea class="textarea-edit-question"></textarea>
+                            <button type="submit" class="edit-question">{{ trans('submit') }}</button>
+                        </span>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    {% if not is_guest %}
+                        <div class="response">
+                            <textarea class="textarea-answer submit-on-return" placeholder="{{ trans('answer_placeholder', plugin) }}"></textarea>
+                            <button type="submit" class="submit-answer">{{ trans('post_answer', plugin) }}</button>
+                        </div>
+                    {% endif %}
+
+                    <div class="answers clearfix">
+                        <span class="answer-header">{{ trans('answers', plugin) }}:</span>
+
+                        <div class="answer clearfix updated">
+
+                            <div class="answer-content">
+                                <span class="answer-text text"></span>
+                                <span class="answer-author author"></span>
+                                <span class="answer-post-date"></span>
+
+                                <div class="edit-input">
+                                    <textarea class="textarea-edit-answer"></textarea>
+                                    <button type="submit" class="edit-answer">{{ trans('submit') }}</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="activity-footer">
+        {% if instance.footer is defined and instance.footer is not empty %}
+            {{ instance.footer|raw() }}
+        {% endif %}
+    </div>
+
+{% endif %}
+
+{# begin footer #}
+{% set footer_script %}
+    <script>if (typeof define === 'function') { window.g_define = define; define = undefined; }</script> {# undefine define :) thereby hiding RequireJS from all footer scripts #}
+    <script src="{{ wwwroot }}/mod/videoquanda/static/js/jquery.jplayer.min.js"></script>
+    <script src="{{ wwwroot }}/mod/videoquanda/static/js/build/videoquanda.min.js"></script>
+    <script>if (window.g_define) { define = window.g_define; delete window.g_define; }</script>
+{% endset %}
+{{ footer(footer_script)|raw }}
+{# end footer #}

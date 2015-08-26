@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/videoquanda/db" VERSION="20131030" COMMENT="XMLDB file for Moodle mod/videoquanda"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+        >
+    <TABLES>
+        <TABLE NAME="videoquanda" COMMENT="VideoQuanda is a Moodle Activity in a Q and A format">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="url" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Path to the video. Either a full URL or a path to an uploaded video"/>
+                <FIELD NAME="header" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="This will appear above the video"/>
+                <FIELD NAME="footer" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="This will appear below the video"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="course" TYPE="foreign" FIELDS="course" REFTABLE="course" REFFIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
+            </INDEXES>
+        </TABLE>
+        <TABLE NAME="videoquanda_questions" COMMENT="Stores all the individual questions for the VideoQuanda activity">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="instanceid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="seconds" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="The amount of seconds in the video this question is asked and should appear."/>
+                <FIELD NAME="text" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="The actual question"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="instance" TYPE="foreign" FIELDS="instanceid" REFTABLE="videoquanda" REFFIELDS="id" COMMENT="The activity instance"/>
+                <KEY NAME="user" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id" COMMENT="The user to map to an id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="instanceid" UNIQUE="false" FIELDS="instanceid"/>
+                <INDEX NAME="seconds" UNIQUE="false" FIELDS="seconds"/>
+            </INDEXES>
+        </TABLE>
+        <TABLE NAME="videoquanda_answers" COMMENT="Stores all the individual answers for a question in the VideoQuanda activity">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="questionid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="text" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="The actual answer"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="questionid" TYPE="foreign" FIELDS="questionid" REFTABLE="videoquanda_questions" REFFIELDS="id" COMMENT="The question instance"/>
+                <KEY NAME="user" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id" COMMENT="The user to map to an id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="questionid" UNIQUE="false" FIELDS="questionid"/>
+            </INDEXES>
+        </TABLE>
+    </TABLES>
+</XMLDB>
