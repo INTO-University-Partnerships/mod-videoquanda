@@ -47,6 +47,9 @@ $controller->get('/{cmid}', function ($cmid) use ($app) {
         'confirm_delete_answer'
     ), $app['plugin']);
 
+    // set heading and title
+    $app['heading_and_title']($course->fullname, $instance->name);
+
     // Get urls from database to pass on to the twig template
     $videos = array();
     if (!empty($instance->url)) {

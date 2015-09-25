@@ -116,6 +116,12 @@ $controller->match('/manage/{cmid}', function (Request $request, $cmid) use ($ap
 
     }
 
+    // set heading and title
+    $app['heading_and_title'](
+        $course->fullname,
+        get_string('editinga', 'moodle', get_string('pluginname', $app['plugin']))
+    );
+
     return $app['twig']->render('manage.twig', array(
         'form' => $form->createView(),
         'course' => $course,

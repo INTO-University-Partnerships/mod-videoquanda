@@ -60,6 +60,7 @@ foreach (array(
     'get_course_and_course_module',
     'get_groupmode',
     'has_capability',
+    'heading_and_title',
     'require_course_login'
 ) as $service) {
     require __DIR__ . '/services/' . $service . '.php';
