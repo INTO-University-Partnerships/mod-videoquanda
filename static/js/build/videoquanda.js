@@ -217,10 +217,10 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var _lib = require('./lib');
 
+var lib = _interopRequireWildcard(_lib);
+
 // Todo: Remove / change output of errors / notifications etc.
 // Todo: Add date to answers?
-
-var lib = _interopRequireWildcard(_lib);
 
 var videoQuanda = {
 
