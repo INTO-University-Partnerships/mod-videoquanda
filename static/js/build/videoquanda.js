@@ -7,8 +7,6 @@
  * As part of which, the circular reference between videoPlayer and videoQuanda would be removed.
  */
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
 var _video = require('./video');
 
 var _video2 = _interopRequireDefault(_video);
@@ -17,8 +15,10 @@ var _videoquanda = require('./videoquanda');
 
 var _videoquanda2 = _interopRequireDefault(_videoquanda);
 
-_video2['default'].videoQuanda = _videoquanda2['default'];
-_videoquanda2['default'].videoPlayer = _video2['default'];
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_video2.default.videoQuanda = _videoquanda2.default;
+_videoquanda2.default.videoPlayer = _video2.default;
 
 },{"./video":3,"./videoquanda":4}],2:[function(require,module,exports){
 'use strict';
@@ -26,7 +26,8 @@ _videoquanda2['default'].videoPlayer = _video2['default'];
 /**
  * @returns {number} (current timestamp in seconds)
  */
-Object.defineProperty(exports, '__esModule', {
+
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.time = time;
@@ -34,7 +35,6 @@ exports.lineBreakToTag = lineBreakToTag;
 exports.tagToLineBreak = tagToLineBreak;
 exports.imgTagToSrcAttr = imgTagToSrcAttr;
 exports.removeAllTags = removeAllTags;
-
 function time() {
   return Math.round(new Date() / 1e3);
 }
@@ -44,7 +44,6 @@ function time() {
  * @param {string} s
  * @returns {string}
  */
-
 function lineBreakToTag(s) {
   return s.replace(/(\r\n|\n\r|\r|\n)/g, '<br/>');
 }
@@ -54,7 +53,6 @@ function lineBreakToTag(s) {
  * @param {string} s
  * @returns {string}
  */
-
 function tagToLineBreak(s) {
   return s.replace(/<br\/?>/ig, '\r\n');
 }
@@ -64,7 +62,6 @@ function tagToLineBreak(s) {
  * @param {string} s
  * @returns {string}
  */
-
 function imgTagToSrcAttr(s) {
   return s.replace(/<img([^>]+)src="(.*?)"([^>]*)>/ig, '$2');
 }
@@ -74,7 +71,6 @@ function imgTagToSrcAttr(s) {
  * @param {string} s
  * @returns {string}
  */
-
 function removeAllTags(s) {
   return s.replace(/(<([^>]+)>)/ig, '');
 }
@@ -82,7 +78,7 @@ function removeAllTags(s) {
 },{}],3:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
     value: true
 });
 var videoPlayer = {
@@ -203,21 +199,22 @@ var videoPlayer = {
 };
 
 videoPlayer.init();
-exports['default'] = videoPlayer;
-module.exports = exports['default'];
+exports.default = videoPlayer;
 
 },{}],4:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
 var _lib = require('./lib');
 
 var lib = _interopRequireWildcard(_lib);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 // Todo: Remove / change output of errors / notifications etc.
 // Todo: Add date to answers?
@@ -391,7 +388,7 @@ var videoQuanda = {
         }
 
         this.requestDataFromApi(seconds, function (questions) {
-            if (typeof questions !== 'object') {
+            if ((typeof questions === 'undefined' ? 'undefined' : _typeof(questions)) !== 'object') {
                 return;
             }
 
@@ -736,7 +733,6 @@ $(document).on('focus', 'textarea', function () {
 });
 
 videoQuanda.init();
-exports['default'] = videoQuanda;
-module.exports = exports['default'];
+exports.default = videoQuanda;
 
 },{"./lib":2}]},{},[1]);

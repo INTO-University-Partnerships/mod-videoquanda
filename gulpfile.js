@@ -1,6 +1,7 @@
 'use strict';
 
-var source = require('vinyl-source-stream'),
+var _ = require('lodash'),
+    source = require('vinyl-source-stream'),
     del = require('del'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
@@ -13,7 +14,8 @@ var source = require('vinyl-source-stream'),
     browserify = require('browserify'),
     babelify = require('babelify'),
     watchify = require('watchify'),
-    envify = require('envify/custom');
+    envify = require('envify/custom'),
+    karma = require('karma');
 
 function handleErrors() {
     var args = Array.prototype.slice.call(arguments);
@@ -46,7 +48,7 @@ function buildScript(production) {
     };
 
     var bundler = production ? browserify(props) : watchify(browserify(props));
-    bundler.transform(babelify).transform(envify());
+    bundler.transform(babelify, {presets: ['es2015', 'react']}).transform(envify());
     bundler.on('update', function () {
         rebundle(bundler, production);
         gutil.log('Rebundle ...');
@@ -71,4 +73,15 @@ gulp.task('build', function () {
 
 gulp.task('watch', function () {
     return buildScript(false);
+});
+
+gulp.task('test', function (done) {
+    return new karma.Server({
+        configFile: __dirname + '/karma.conf.js',
+        reporters: ['spec'],
+        singleRun: !!_.isUndefined(gutil.env.watch),
+        browsers: _.isUndefined(gutil.env.browser) ? ['PhantomJS', 'Firefox', 'Chrome'] : [gutil.env.browser]
+    }, function () {
+        done();
+    }).start();
 });
