@@ -37,7 +37,7 @@ The following packages must be added to `composer.json`:
         "lstrojny/functional-php": "1.0.0"
     },
     "require-dev": {
-        "mockery/mockery": "dev-master"
+        "mockery/mockery": "0.9.4"
     }
 
 # Installation
