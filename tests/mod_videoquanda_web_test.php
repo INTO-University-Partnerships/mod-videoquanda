@@ -274,7 +274,7 @@ class mod_videoquanda_web_test extends advanced_testcase {
         $client->request('GET', '/file/' . $videoquanda->id . '/video.mov');
 
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
-        $this->assertContains('Can not read file, either file does not exist or there are permission problems', $client->getResponse()->getContent());
+        $this->assertContains(get_string('storedfilecannotread', 'error'), $client->getResponse()->getContent());
     }
 
     /**
